@@ -1,4 +1,3 @@
-import click
 from flask import render_template, url_for, redirect, flash, request
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from watchlist import db, app
@@ -70,7 +69,7 @@ def login():
             flash('Invalid input!')
             return redirect(url_for('login'))
         user = User.query.first()
-        if username == user.username or user.validate_password(password):
+        if username == user.username and user.validate_password(password):
             login_user(user)
             flash('Login success!')
             return redirect(url_for('index'))
